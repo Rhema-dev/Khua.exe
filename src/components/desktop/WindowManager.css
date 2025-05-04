@@ -1,0 +1,12 @@
+.window-manager {
+    position: absolute;
+    top: 5%;  /* Position the WindowManager container 5% from the top */
+    left: 5%; /* Position the container 5% from the left */
+    right: 5%; /* Position the container 5% from the right */
+    bottom: 5%; /* Position the container 5% from the bottom */
+    width: 90%; /* Take 90% of the screen's width */
+    height: 90%; /* Take 90% of the screen's height */
+    overflow: hidden; /* Hide any content that goes beyond the container's boundaries */
+    z-index: 2; /* Ensure the window manager is above other elements but below the 3D background */
+    pointer-events: auto; /* Allow interactions with windows */
+  }

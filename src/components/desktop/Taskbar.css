@@ -1,0 +1,127 @@
+/* Taskbar */
+.taskbar {
+    height: 3rem;
+    background-color: rgba(31, 41, 55, 0.9); /* dark gray with opacity */
+    backdrop-filter: blur(8px); /* Creates a frosted glass effect */
+    display: flex;
+    align-items: center;
+    padding: 0 1rem; /* More space on the left and right */
+    border-top: 1px solid #374151; /* border to create separation */
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    width: 100%; /* Stretch to full width */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
+  }
+  
+  /* Start Button */
+  .taskbar-start-button {
+    height: 2.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    background: transparent;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .taskbar-start-button:hover {
+    background-color: #374151; /* Darken on hover */
+  }
+  
+  .start-icon {
+    color: #60a5fa; /* blue-400 */
+    font-size: 1.25rem; /* Make the icon slightly larger */
+  }
+  
+  .start-text {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  /* Window List */
+  .taskbar-window-list {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    overflow-x: auto;
+    gap: 0.5rem;
+  }
+  
+  .taskbar-window-button {
+    padding: 0.25rem 0.75rem;
+    margin: 0 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    min-width: max-content;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .taskbar-window-button.active {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+  }
+  
+  .taskbar-window-button.minimized {
+    background-color: #374151; /* gray-700 */
+    color: #d1d5db; /* gray-300 */
+  }
+  
+  .taskbar-window-button:hover {
+    background-color: #2d4e78; /* Slightly darker blue for hover effect */
+    color: white;
+  }
+  
+  /* Taskbar Right Section (Clock, Shutdown) */
+  .taskbar-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+    gap: 1rem; /* Spacing between the clock and shutdown button */
+  }
+  
+  /* Shutdown Button */
+  .shutdown-button {
+    padding: 0.5rem;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .shutdown-button:hover {
+    background-color: rgba(220, 38, 38, 0.5); /* red-600 with opacity */
+  }
+  
+  /* Clock */
+  .clock {
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(55, 65, 81, 0.5); /* gray-700 with opacity */
+    border-radius: 0.375rem;
+    color: white;
+    font-size: 0.875rem; /* Slightly larger font for clock */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .clock-icon {
+    margin-right: 0.25rem;
+    font-size: 1rem; /* Slightly larger icon */
+  }
+  

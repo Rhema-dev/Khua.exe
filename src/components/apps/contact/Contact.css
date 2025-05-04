@@ -1,0 +1,235 @@
+/* Dark Theme - Contact Section */
+
+.contact-container {
+  padding: 24px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #111827; /* dark gray background */
+  color: #f9fafb; /* light text */
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .contact-content {
+    flex-direction: row;
+  }
+}
+
+/* Left & Right Columns */
+.contact-info-col,
+.contact-form-col {
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .contact-info-col {
+    width: 33%;
+  }
+  .contact-form-col {
+    width: 67%;
+  }
+}
+
+/* Cards */
+.contact-info-card,
+.contact-form-card {
+  background-color: #1f2937; /* slightly lighter dark */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+}
+
+.contact-info-title,
+.contact-form-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #f9fafb;
+}
+
+.contact-info-text {
+  color: #9ca3af;
+  margin-bottom: 24px;
+}
+
+/* Contact Methods */
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.contact-method:hover {
+  background-color: #374151;
+}
+
+.contact-method-icon {
+  margin-right: 16px;
+  font-size: 20px;
+}
+
+.contact-method-icon.email {
+  color: #3b82f6;
+}
+
+.contact-method-icon.phone {
+  color: #10b981;
+}
+
+.contact-method-icon.location {
+  color: #ef4444;
+}
+
+.contact-method-text h3 {
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: #f3f4f6;
+}
+
+.contact-method-text p {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Social Links */
+.social-links-section {
+  margin-top: 32px;
+}
+
+.social-links-title {
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #f3f4f6;
+}
+
+.social-links-container {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #374151;
+  border-radius: 50%;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.1);
+  background-color: #4b5563;
+}
+
+.social-link.linkedin {
+  color: #0a66c2;
+}
+
+.social-link.github {
+  color: #f9fafb;
+}
+
+.social-link.twitter {
+  color: #1d9bf0;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 16px;
+  padding-right: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #d1d5db;
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px;
+  background-color: #111827;
+  color: #f9fafb;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Status Messages */
+.status-message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.status-success {
+  background-color: #064e3b;
+  color: #d1fae5;
+}
+
+.status-error {
+  background-color: #7f1d1d;
+  color: #fee2e2;
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 12px 24px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #2563eb;
+  transform: scale(1.02);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

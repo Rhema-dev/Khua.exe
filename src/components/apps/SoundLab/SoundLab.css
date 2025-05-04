@@ -1,0 +1,70 @@
+.soundlab-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  background: #0e0e0e;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+  /* padding: 2rem; */
+}
+
+.soundlab-upload {
+  text-align: center;
+  background: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+  transition: all 0.3s ease;
+}
+
+.soundlab-upload h2 {
+  margin-bottom: 0.5rem;
+}
+
+.soundlab-player {
+  background: #1e1e1e;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.soundlab-info {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.soundlab-controls {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.soundlab-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.soundlab-slider input[type="range"] {
+  width: 100%;
+  accent-color: #00ffaa;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  background: #00ffaa;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #00ddaa;
+}

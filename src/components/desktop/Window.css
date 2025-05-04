@@ -1,0 +1,83 @@
+/* Window Container */
+.window-container {
+  width: 100%;
+  height: 100%;
+  background-color: #2d343f; /* Darker background for a sleek dark mode */
+  border: 1px solid #636e72; /* Lighter gray border for dark mode */
+  border-radius: 0.75rem 0.75rem 0 0; /* Rounded corners for modern feel */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  z-index: 40;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth focus effect */
+}
+
+/* Focused Window */
+.window-container.focused {
+  z-index: 50;
+  transform: scale(1.02); /* Slight zoom effect when focused */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Subtle, darker shadow for focus */
+}
+
+/* Window Header */
+.window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333842; /* Darker header */
+  padding: 12px 16px;
+  border-bottom: 1px solid #444d56; /* Subtle bottom border */
+}
+
+/* Window Title */
+.window-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize; /* Make the title more dynamic */
+  color: #f9fafb; /* Light title color for readability */
+}
+
+/* Window Controls */
+.window-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Window Button Styles */
+.window-btn {
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s; /* Smooth hover transition */
+  color: #f3f4f6; /* Light icon color */
+}
+
+.window-btn:hover {
+  background-color: #1e40af; /* Slightly darker blue on hover */
+  transform: scale(1.1); /* Slight scale effect when hovered */
+}
+
+.window-btn.close:hover {
+  background-color: #dc2626; /* Red hover for close button */
+}
+
+/* Window Content */
+.window-content {
+  /* padding: 16px; */
+  background-color: #1c2128; /* Dark content background */
+  color: #eaeaea; /* Light text */
+  height: calc(100% - 80px); /* Allow space for header and footer */
+  overflow-y: auto;
+  border-bottom-left-radius: 12px; /* Rounded bottom corners */
+  border-bottom-right-radius: 12px; /* Rounded bottom corners */
+}
+
+/* Window Footer */
+.window-footer {
+  height: 1rem;
+  background-color: #2d343f; /* Dark footer to match container */
+  border-top: 1px solid #636e72; /* Subtle border to match dark theme */
+}

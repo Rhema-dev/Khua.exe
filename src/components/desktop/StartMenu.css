@@ -1,0 +1,52 @@
+/* Start Menu container */
+.start-menu {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 0;
+    width: 16rem;
+    background-color: rgba(31, 41, 55, 0.95); /* gray-800 with opacity */
+    backdrop-filter: blur(8px);
+    border-radius: 0.5rem 0.5rem 0.5rem 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid #374151; /* gray-700 */
+    overflow: hidden;
+    z-index: 50;
+  }
+  
+  /* Header */
+  .start-menu-header {
+    padding: 0.5rem;
+    background: linear-gradient(to right, #2563eb, #3b82f6); /* blue-600 to blue-500 */
+    color: white;
+    font-weight: 600;
+  }
+  
+  /* Body */
+  .start-menu-body {
+    padding: 0.5rem 0;
+  }
+  
+  /* Individual item */
+  .start-menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .start-menu-item:hover {
+    background-color: #374151; /* gray-700 */
+  }
+  
+  .item-icon {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+  }
+  

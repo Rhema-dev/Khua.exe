@@ -1,0 +1,228 @@
+/* Base Container */
+.about-container {
+  padding: 24px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    flex-direction: row;
+  }
+}
+
+.about-left-col,
+.about-right-col {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .about-left-col {
+    width: 33.33%;
+  }
+  .about-right-col {
+    width: 66.66%;
+  }
+}
+
+/* Shared Card Styles */
+.profile-card,
+.hobbies-card,
+.about-card,
+.skills-card,
+.experience-card {
+  background-color: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* Profile */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Profile Avatar - Fixed Circle */
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #6366f1, #ec4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  flex-shrink: 0; /* Prevents shrinking */
+  overflow: hidden; /* Ensures content stays within circle */
+  position: relative; /* For absolute positioning of initials */
+}
+
+/* Text inside avatar */
+.profile-avatar-initials {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  white-space: nowrap; /* Prevents text wrapping */
+  max-width: 90%; /* Prevents overflow */
+  text-overflow: ellipsis; /* Adds ... if text is too long */
+}
+
+.profile-info {
+  margin-left: 16px;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: #f9fafb;
+}
+
+.profile-title {
+  color: #94a3b8;
+  margin: 4px 0 0 0;
+  font-size: 14px;
+}
+
+/* Contact Info */
+.contact-info {
+  margin-top: 24px;
+}
+
+.contact-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+}
+
+.contact-text {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #cbd5e1;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.social-link {
+  color: #60a5fa;
+  transition: color 0.2s;
+}
+
+.social-link:hover {
+  color: #3b82f6;
+}
+
+/* Hobbies */
+.hobbies-title,
+.about-title,
+.skills-title,
+.experience-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: #f9fafb;
+}
+
+.hobbies-list,
+.skills-list,
+.experience-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hobby-tag {
+  background-color: #7c3aed;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+
+.hobby-tag:hover {
+  transform: scale(1.05);
+}
+
+/* About Text */
+.about-text {
+  margin-bottom: 16px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Skills */
+.skill-tag {
+  background-color: #1e40af;
+  color: #dbeafe;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+
+.skill-tag:hover {
+  transform: scale(1.05);
+}
+
+/* Experience */
+.experience-item {
+  border-left: 2px solid #60a5fa;
+  padding-left: 16px;
+}
+
+.experience-role {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.experience-company {
+  color: #94a3b8;
+}
+
+.experience-period {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Download Button */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #2563eb;
+}
+
+.download-icon {
+  margin-right: 8px;
+}
