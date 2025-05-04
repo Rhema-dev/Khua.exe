@@ -48,7 +48,7 @@ body {
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
+  
 .loader-overlay {
   position: absolute;
   top: 10;
@@ -79,5 +79,14 @@ body {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+@media screen and (max-width: 768px) {
+  .viewer3d-canvas-container {
+    width: 100%;
+    height: 900px;
+    background: radial-gradient(circle at center, #5f5d5d, #1e1e1e);
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   }
 }

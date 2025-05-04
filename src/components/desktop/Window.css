@@ -81,3 +81,94 @@
   background-color: #2d343f; /* Dark footer to match container */
   border-top: 1px solid #636e72; /* Subtle border to match dark theme */
 }
+/* iOS Window Styles */
+.ios-window-container {
+  background-color: #ffffff;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  height: 10px; /* Full height on mobile */	
+}
+
+.ios-window-container.focused {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ios-window-header {
+  height: 2.5rem;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #e5e5e7;
+}
+
+.ios-window-handle {
+  width: 36px;
+  height: 5px;
+  background-color: #d1d1d6;
+  border-radius: 3px;
+}
+
+.ios-window-btn.close {
+  position: absolute;
+  right: 1rem;
+  color: #ff3b30;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+}
+
+.ios-window-content {
+  background-color: #ffffff;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ios-home-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 5px;
+  background-color: #000;
+  opacity: 0.2;
+  border-radius: 3px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .window-container {
+    display: none; /* Hide desktop windows on mobile */
+  }
+  
+  .ios-window-container {
+    display: flex; /* Show iOS-style windows */
+  }
+}
+
+/* Smaller Phones */
+@media (max-width: 480px) {
+  .ios-window-container {
+    border-radius: 0.8rem;
+  }
+  
+  .ios-window-header {
+    height: 2.2rem;
+  }
+  
+  .ios-window-handle {
+    width: 30px;
+    height: 4px;
+  }
+}

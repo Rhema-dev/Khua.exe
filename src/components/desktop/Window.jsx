@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FiMinus, FiMaximize2, FiX } from 'react-icons/fi'
 import { Rnd } from 'react-rnd'
 import './Window.css'
@@ -15,10 +15,71 @@ export default function Window({
   onFocus,
   isFocused
 }) {
-  const [isDragging, setIsDragging] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   
+  useEffect(() => {
+    const checkIfMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkIfMobile()
+    window.addEventListener('resize', checkIfMobile)
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
+
   if (minimized) return null
 
+  // Mobile fullscreen handler
+  const handleMaximize = (e) => {
+    e.stopPropagation()
+    setIsFullscreen(!isFullscreen)
+    onMaximize()
+  }
+
+  if (isMobile) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ 
+          opacity: 1,
+          scale: 1,
+          y: isFullscreen ? 0 : 20
+        }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ type: 'spring', damping: 25 }}
+        className={`ios-window-container ${isFocused ? 'focused' : ''}`}
+        onClick={onFocus}
+        style={{
+          position: isFullscreen ? 'fixed' : 'fixed',
+          top: isFullscreen ? 0 : '0',
+          left: isFullscreen ? 0 : '0',
+          width: isFullscreen ? '100vw' : '100%',
+          height: isFullscreen ? '100vh' : '100%',
+          zIndex: isFocused ? 100 : 100
+        }}
+      >
+        {/* iOS-style header bar */}
+        <div className="ios-window-header">
+          <div className="ios-window-handle"></div>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onClose() }} 
+            className="ios-window-btn close"
+          >
+            <FiX size={18} />
+          </button>
+        </div>
+        
+        <div className="ios-window-content">
+          {children}
+        </div>
+        
+        {/* iOS home indicator for fullscreen */}
+        {isFullscreen && (
+          <div className="ios-home-indicator"></div>
+        )}
+      </motion.div>
+    )
+  }
+
+  // Desktop version
   return (
     <Rnd
       default={{
@@ -50,7 +111,7 @@ export default function Window({
             <button onClick={(e) => { e.stopPropagation(); onMinimize() }} className="window-btn">
               <FiMinus size={14} />
             </button>
-            <button onClick={(e) => { e.stopPropagation(); onMaximize() }} className="window-btn">
+            <button onClick={handleMaximize} className="window-btn">
               <FiMaximize2 size={14} />
             </button>
             <button onClick={(e) => { e.stopPropagation(); onClose() }} className="window-btn close">

@@ -1,34 +1,126 @@
+/* Desktop Container - Base Styles */
 .desktop-container {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    padding: 1rem;
-  }
-  
-  .desktop-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    width: max-content;
-  }
-  
-  .desktop-icon {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.desktop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.desktop-icon-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.desktop-icon-label {
+  font-size: 0.75rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* iOS-Style Mobile Transformation (No-Scroll Version) */
+@media (max-width: 768px) {
+  .desktop-container {
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    transition: transform 0.2s ease;
+    /* height: 100vh; */
+    overflow: hidden; /* Changed from auto to hidden */
+    touch-action: none; /* Allows 3D background control */
   }
-  
+
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 500px;
+    overflow: hidden; /* Prevent grid scrolling */
+  }
+
+  .desktop-icon {
+    padding: 0.5rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    touch-action: manipulation; /* Better touch control */
+  }
+
+  .desktop-icon:active {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
   .desktop-icon-emoji {
-    font-size: 2.5rem;
-    margin-bottom: 0.25rem;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Allows clicks to pass through to 3D background */
   }
-  
+
   .desktop-icon-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 500;
     color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: none;
+    text-align: center;
+    word-break: break-word;
+    max-width: 70px;
+    pointer-events: none; /* Allows clicks to pass through */
   }
-  
+
+  /* Remove the dock space since we're not scrolling */
+  .desktop-grid::after {
+    display: none;
+  }
+}
+
+/* Smaller Phones - No Scroll */
+@media (max-width: 480px) {
+  .desktop-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .desktop-icon-emoji {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+
+  .desktop-icon-label {
+    font-size: 0.65rem;
+    max-width: 60px;
+  }
+}
+
+/* Landscape Orientation - No Scroll */
+@media (max-width: 768px) and (orientation: landscape) {
+  .desktop-grid {
+    grid-template-columns: repeat(6, 1fr);
+    padding-bottom: 2rem; /* Extra space at bottom */
+  }
+}
