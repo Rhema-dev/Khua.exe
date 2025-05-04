@@ -4,7 +4,7 @@ import Desktop from "./components/desktop/Desktop";
 import Taskbar from "./components/desktop/Taskbar";
 import WindowManager from "./components/desktop/WindowManager";
 import ThreeScene from "./components/ThreeScene";
-import ShutdownScreen from "./components/apps/shutdown/Shutdown";
+import ShutdownScreen from "./components/apps/shutdown/shutdown";
 import StartMenu from "./components/desktop/StartMenu";
 import "./App.css";
 
