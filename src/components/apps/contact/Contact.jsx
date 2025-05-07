@@ -1,42 +1,63 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa'
-import './Contact.css'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import emailjs from 'emailjs-com';
+import './Contact.css';
+
+emailjs.init("oylVlQJ9s3IpWVNTt");
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
     
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-    } catch (error) {
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-      setTimeout(() => setSubmitStatus(null), 5000)
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 3000);
+      return;
     }
-  }
+
+    setIsSubmitting(true);
+    
+    try {
+      await emailjs.send(
+        "service_anzes2l",
+        "template_8v1ksmz",
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+          to_email: 'emmaarhema20000@gmail.com' // Your receiving email
+        }
+      );
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
 
   const contactMethods = [
     {
@@ -55,32 +76,28 @@ export default function Contact() {
       icon: <FaMapMarkerAlt className="contact-method-icon location" />,
       title: 'Location',
       value: 'Warri, Delta State, Nigeria',
-      action: 'https://maps.google.com'
+      action: 'https://maps.google.com?q=Warri,DeltaState,Nigeria'
     }
-  ]
+  ];
 
   const socialLinks = [
     {
       icon: <FaLinkedin className="social-link linkedin" />,
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/emmanuel-great-rhema-970384319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'
+      url: 'https://www.linkedin.com/in/emmanuel-great-rhema-970384319'
     },
     {
       icon: <FaGithub className="social-link github" />,
       name: 'GitHub',
       url: 'https://github.com/Rhema-dev'
-    },
-    // {
-    //   icon: <FaTwitter className="social-link twitter" />,
-    //   name: 'Twitter',
-    //   url: 'https://twitter.com/yourhandle'
-    // }
-  ]
+    }
+  ];
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="contact-container"
     >
       <div className="contact-content">
@@ -88,6 +105,7 @@ export default function Contact() {
         <motion.div 
           initial={{ x: -20 }}
           animate={{ x: 0 }}
+          transition={{ duration: 0.5 }}
           className="contact-info-col"
         >
           <div className="contact-info-card">
@@ -101,7 +119,10 @@ export default function Contact() {
                 <motion.a
                   key={index}
                   whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.95 }}
                   href={method.action}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact-method"
                 >
                   {method.icon}
@@ -139,6 +160,7 @@ export default function Contact() {
         <motion.div
           initial={{ x: 20 }}
           animate={{ x: 0 }}
+          transition={{ duration: 0.5 }}
           className="contact-form-col"
         >
           <div className="contact-form-card">
@@ -150,7 +172,7 @@ export default function Contact() {
                 animate={{ opacity: 1, y: 0 }}
                 className="status-message status-success"
               >
-                Message sent successfully! I'll get back to you soon.
+                <p>Message sent successfully! I'll get back to you soon.</p>
               </motion.div>
             )}
 
@@ -160,14 +182,14 @@ export default function Contact() {
                 animate={{ opacity: 1, y: 0 }}
                 className="status-message status-error"
               >
-                Error sending message. Please try again later.
+                <p>Error sending message. Please try again later or contact me directly via email.</p>
               </motion.div>
             )}
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name" className="form-label">
-                  Name
+                  Name *
                 </label>
                 <input
                   type="text"
@@ -177,12 +199,13 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="form-input"
+                  disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
-                  Email
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -192,12 +215,13 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="form-input"
+                  disabled={isSubmitting}
                 />
               </div>
 
               <div className="form-group">
                 <label htmlFor="message" className="form-label">
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -207,6 +231,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="form-input form-textarea"
+                  disabled={isSubmitting}
                 ></textarea>
               </div>
 
@@ -215,14 +240,21 @@ export default function Contact() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="submit-btn"
+                className={`submit-btn ${isSubmitting ? 'submitting' : ''}`}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner"></span>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </motion.button>
             </form>
           </div>
         </motion.div>
       </div>
     </motion.div>
-  )
+  );
 }

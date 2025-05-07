@@ -45,13 +45,13 @@ export default function KhuaApp() {
       },
       {
         id: 2,
-        name: "EcommerceApp.next",
+        name: "Wiki.test",
         type: "web",
         url: "https://en.wikipedia.org/wiki/Main_Page",
       },
       {
         id: 3,
-        name: "BlogPlatform.vue",
+        name: "code.test",
         type: "web",
         url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
       },

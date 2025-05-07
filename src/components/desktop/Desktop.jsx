@@ -9,7 +9,7 @@ export default function Desktop({ openWindow }) {
     // {name: 'PixelArt', icon: '🖼️', action: 'pixelart'},
     {name: 'SoundLab', icon: '🔊', action: 'SoundLab'},
     // {name: '3DViewer', icon: '🖥️', action: '3DViewer'},
-    { name: 'Code', icon: '⛅', action: 'code' },
+    { name: 'Code', icon: '👨‍💻', action: 'code' },
     // { name: 'Calculator', icon: '🧮', action: 'calculator' },
     // { name: 'Portfolio', icon: '👨‍💻', action: 'portfolio'},
   ]

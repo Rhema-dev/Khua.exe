@@ -13,6 +13,7 @@
   "dependencies": {
     "@react-three/drei": "^10.0.7",
     "@react-three/fiber": "^9.1.2",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.9.4",
     "react": "^19.1.0",
     "react-colorful": "^5.6.1",

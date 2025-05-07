@@ -6,7 +6,7 @@ export default function StaticEffect() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.volume = 0.2; // Set volume to 10%
+      videoRef.current.volume = 0.01; // Set volume to 10%
     }
   }, []);
 
@@ -17,6 +17,7 @@ export default function StaticEffect() {
       autoPlay
       loop
       playsInline
+      muted
       src="/static_noise.mp4" // place this file in your public folder
     />
   );

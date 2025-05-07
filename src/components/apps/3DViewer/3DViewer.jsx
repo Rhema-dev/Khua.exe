@@ -1,56 +1,53 @@
-  import { Suspense, useState } from "react";
-  import { Canvas } from "@react-three/fiber";
-  import { OrbitControls, useGLTF } from "@react-three/drei";
-  import "./3DViewer.css";
+import { Suspense, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
+import "./3DViewer.css";
 
-  function Model({ modelPath }) {
-    // This will automatically load the .gltf, .bin, and textures
-    const { scene } = useGLTF(modelPath);
-    return <primitive object={scene} />;
-  }
+function Model({ modelPath }) {
+  const { scene } = useGLTF(modelPath);
 
-  export default function ModelViewer() {
-    const [model, setModel] = useState("/assets/models/robot/scene.gltf"); // Path to your .gltf file
+  // Apply scale ONLY if the BMW model is selected
+  const isBMW = modelPath.includes("bmw_m4_g82");
+  const scale = isBMW ? [150, 150, 150] : [1, 1, 1];
 
-    return (
-      <div>
-        <div className="viewer3d-title-bar"></div>
-        <div className="viewer3d-content">
-        
+  return <primitive object={scene} scale={scale} />;
+}
 
-          {/* 3D Canvas */}
-          <div className="viewer3d-canvas-container">
-  {/* Model selector dropdown */}
-          <select
-            onChange={(e) => setModel(e.target.value)}
-            className="viewer3d-select"
+export default function ModelViewer() {
+  const [model, setModel] = useState("/assets/models/robot/scene.gltf");
+
+  return (
+    <div>
+      <div className="viewer3d-title-bar"></div>
+      <div className="viewer3d-content">
+        {/* Model selector dropdown */}
+        <select
+          onChange={(e) => setModel(e.target.value)}
+          className="viewer3d-select"
+        >
+          <option value="/assets/models/robot/scene.gltf">Robot</option>
+          <option value="/assets/models/bmw_m4_g82/scene.gltf">BMW M4 G82</option>
+        </select>
+
+        {/* 3D Canvas */}
+        <div className="viewer3d-canvas-container">
+          <Canvas
+            camera={{ position: [5, 5, 5], fov: 75 }}
+            gl={{ preserveDrawingBuffer: true }}
           >
-            <option value="assets/models/robot/scene.gltf">Robot</option>
-            {/* <option value="assets/models/asus-rog-zephyrus-duo-16/source/asus-rog-zephyrus-duo-16.glb">Asus</option> */}
-            <option value="assets/models/robot/scene.gltf">Robot</option>
-            <option value="assets/models/robot/scene.gltf">Robot</option>
-            <option value="assets/models/robot/scene.gltf">Robot</option>
-            <option value="assets/models/robot/scene.gltf">Robot</option>
-            {/* Add other models as needed */}
-          </select>
-
-            <Canvas
-              camera={{ position: [5, 5, 5], fov: 75 }}
-              gl={{ preserveDrawingBuffer: true }} // For screenshots
-            >
-              <ambientLight intensity={10} />
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-              <Suspense fallback={null}>
-                <Model modelPath={model} />
-                <OrbitControls
-                  enablePan={true}
-                  enableZoom={true}
-                  enableRotate={true}
-                />
-              </Suspense>
-            </Canvas>
-          </div>
+            <ambientLight intensity={10} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <Suspense fallback={null}>
+              <Model modelPath={model} />
+              <OrbitControls
+                enablePan={true}
+                enableZoom={true}
+                enableRotate={true}
+              />
+            </Suspense>
+          </Canvas>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
