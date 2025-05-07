@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   padding: 1rem;
+  width: fit-content;
 }
 
 .desktop-grid {
@@ -51,7 +52,7 @@
     width: 100%;
     padding: 1rem;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 500px; 
     overflow: hidden; /* Prevent grid scrolling */
   }
 

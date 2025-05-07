@@ -46,6 +46,7 @@ function App() {
       pixelart: "Pixel Art Studio.exe",
       SoundLab: "Sound Lab.exe",
       "3DViewer": "3D Model Viewer.exe",
+      code : "Write your code"
     };
 
     setWindows((prev) => [
@@ -72,7 +73,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <>
         <div onClick={() => setShowStartMenu(false)}>
           <ThreeScene />
           <Desktop openWindow={openWindow} />
@@ -95,7 +96,7 @@ function App() {
             onClose={() => setShowStartMenu(false)}
           />
         )}
-      </div>
+      </>
     </Router>
   );
 }

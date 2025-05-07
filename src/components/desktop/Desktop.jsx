@@ -8,7 +8,10 @@ export default function Desktop({ openWindow }) {
     { name: 'Contact', icon: '✉️', action: 'contact' },
     // {name: 'PixelArt', icon: '🖼️', action: 'pixelart'},
     {name: 'SoundLab', icon: '🔊', action: 'SoundLab'},
-    {name: '3DViewer', icon: '🖥️', action: '3DViewer'},
+    // {name: '3DViewer', icon: '🖥️', action: '3DViewer'},
+    { name: 'Code', icon: '⛅', action: 'code' },
+    // { name: 'Calculator', icon: '🧮', action: 'calculator' },
+    // { name: 'Portfolio', icon: '👨‍💻', action: 'portfolio'},
   ]
 
   return (
@@ -23,7 +26,8 @@ export default function Desktop({ openWindow }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="desktop-icon"
-            onClick={() => openWindow(item.action)}
+            onClick={() => { openWindow(item.action) 
+              console.log(item.action)} }
             onDoubleClick={() => openWindow(item.action)}
           >
             <div className="desktop-icon-emoji">{item.icon}</div>

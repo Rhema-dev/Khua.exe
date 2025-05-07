@@ -24,6 +24,7 @@ body {
 
 .viewer3d-select {
   padding: 1rem 1rem;
+  margin-left: 90%;
   font-size: 1rem;
   border-radius: 0.75rem;
   border: 1px solid #334155;

@@ -10,3 +10,38 @@
     z-index: 2; /* Ensure the window manager is above other elements but below the 3D background */
     pointer-events: auto; /* Allow interactions with windows */
   }
+  /* Iframe container styles */
+.iframe-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.app-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+}
+
+/* Loading state (optional) */
+.iframe-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* For the no-windows state */
+.no-windows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 1.2rem;
+}

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { 
-  FaFolder, 
+import { motion } from "framer-motion";
+import { useState } from "react";
+import {
+  FaFolder,
   FaFolderOpen,
   FaImage,
   FaVideo,
@@ -11,69 +11,144 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaSearch,
-  FaEllipsisH
-} from 'react-icons/fa'
-import Projects3D from './Projects3D'
-import ProjectsMotion from './ProjectsMotion'
-import ProjectsVideo from './ProjectsVideo'
-import ProjectsGame from './ProjectsGame'
-import ProjectsSound from './ProjectsSound'
-import './khua.css'
+  FaEllipsisH,
+  FaGlobe,
+} from "react-icons/fa";
+import ProjectsWeb from "./ProjectsWeb";
+import ModelViewer from "../3DViewer/3DViewer";
+import Projects3D from "./Projects3D";
+import ProjectsMotion from "./ProjectsMotion";
+import ProjectsVideo from "./ProjectsVideo";
+import ProjectsGame from "./ProjectsGame";
+import ProjectsSound from "./ProjectsSound";
+import "./khua.css";
 
 export default function KhuaApp() {
-  const [activeTab, setActiveTab] = useState('3d')
-  
+  const [activeTab, setActiveTab] = useState("3d");
+
   const tabs = [
-    { id: '3d', label: '3D Art', icon: <FaImage /> },
-    { id: 'motion', label: 'Motion Graphics', icon: <FaVideo /> },
-    { id: 'video', label: 'Video Editing', icon: <FaVideo /> },
-    { id: 'game', label: 'Game Dev', icon: <FaGamepad /> },
-    { id: 'sound', label: 'Sound Design', icon: <FaMusic /> }
-  ]
+    { id: "web", label: "Web", icon: <FaGlobe /> },
+    { id: "3d", label: "3D Art", icon: <FaImage /> },
+    { id: "motion", label: "Motion Graphics", icon: <FaVideo /> },
+    { id: "video", label: "Video Editing", icon: <FaVideo /> },
+    { id: "game", label: "Game Dev", icon: <FaGamepad /> },
+    { id: "sound", label: "Sound Design", icon: <FaMusic /> },
+  ];
 
   const projects = {
-    '3d': [
-      { id: 1, name: 'Architecture.fbx', type: '3d' },
-      { id: 2, name: 'Character.obj', type: '3d' },
-      { id: 3, name: 'Product.glb', type: '3d' }
+    web: [
+      {
+        id: 1,
+        name: "PortfolioSite.react",
+        type: "web",
+        url: "https://khua-exe.pages.dev",
+      },
+      {
+        id: 2,
+        name: "EcommerceApp.next",
+        type: "web",
+        url: "https://en.wikipedia.org/wiki/Main_Page",
+      },
+      {
+        id: 3,
+        name: "BlogPlatform.vue",
+        type: "web",
+        url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
+      },
     ],
-    'motion': [
-      { id: 1, name: 'BrandIdent.aep', type: 'motion' },
-      { id: 2, name: 'Explainer.aep', type: 'motion' },
-      { id: 3, name: 'Titles.aep', type: 'motion' }
-    ],
-    'video': [
-      { id: 1, name: 'ShortFilm.prproj', type: 'video' },
-      { id: 2, name: 'MusicVideo.prproj', type: 'video' },
-      { id: 3, name: 'Corporate.drp', type: 'video' }
-    ],
-    'game': [
-      { id: 1, name: 'PuzzleGame.unity', type: 'game' },
-      { id: 2, name: 'VRExperience.ue', type: 'game' },
-      { id: 3, name: 'BrowserRPG.js', type: 'game' }
-    ],
-    'sound': [
-      { id: 1, name: 'FilmScore.logicx', type: 'sound' },
-      { id: 2, name: 'GameSFX.fmod', type: 'sound' },
-      { id: 3, name: 'Album.als', type: 'sound' }
-    ]
-  }
 
-  const [selectedFile, setSelectedFile] = useState(null)
+    "3d": [
+      { id: 1, name: "Open Model Viewer", type: "3d" },
+    ],
+    motion: [
+      { id: 1, name: "BrandIdent.aep", type: "motion" },
+      { id: 2, name: "Explainer.aep", type: "motion" },
+      { id: 3, name: "Titles.aep", type: "motion" },
+    ],
+    video: [
+      { id: 1, name: "ShortFilm.prproj", type: "video" },
+      { id: 2, name: "MusicVideo.prproj", type: "video" },
+      { id: 3, name: "Corporate.drp", type: "video" },
+    ],
+    game: [
+      {
+        id: 1,
+        name: "PortfolioSite.react",
+        type: "web",
+        url: "https://khua-exe.pages.dev",
+      },
+      {
+        id: 2,
+        name: "EcommerceApp.next",
+        type: "web",
+        url: "https://en.wikipedia.org/wiki/Main_Page",
+      },
+      {
+        id: 3,
+        name: "BlogPlatform.vue",
+        type: "web",
+        url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
+      },
+    ],
+    sound: [
+      { id: 1, name: "FilmScore.logicx", type: "sound" },
+      { id: 2, name: "GameSFX.fmod", type: "sound" },
+      { id: 3, name: "Album.als", type: "sound" },
+    ],
+  };
+
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const renderContent = () => {
     if (selectedFile) {
       switch (selectedFile.type) {
-        case '3d': return <Projects3D />
-        case 'motion': return <ProjectsMotion />
-        case 'video': return <ProjectsVideo />
-        case 'game': return <ProjectsGame />
-        case 'sound': return <ProjectsSound />
-        default: return <div className="empty-state">Select a file to view</div>
+        case "web":
+          return selectedFile.url ? (
+            <div className="iframe-wrapper">
+              <iframe
+                src={selectedFile.url}
+                title={selectedFile.name}
+                // frameBorder="0"
+                width="100%"
+                height="100%"
+              ></iframe>
+            </div>
+          ) : (
+            <div className="empty-state">
+              No URL provided for this web project.
+            </div>
+          );
+
+        case "3d":
+          return <ModelViewer />;
+        case "motion":
+          return <ProjectsMotion />;
+        case "video":
+          return <ProjectsVideo />;
+        case "game":
+          return selectedFile.url ? (
+            <div className="iframe-wrapper">
+              <iframe
+                src={selectedFile.url}
+                title={selectedFile.name}
+                // frameBorder="0"
+                width="100%"
+                height="100%"
+              ></iframe>
+            </div>
+          ) : (
+            <div className="empty-state">
+              No URL provided for this web project.
+            </div>
+          );
+        case "sound":
+          return <ProjectsSound />;
+        default:
+          return <div className="empty-state">Select a file to view</div>;
       }
     }
-    return <div className="empty-state">Select a file to view</div>
-  }
+    return <div className="empty-state">Select a file to view</div>;
+  };
 
   return (
     <div className="file-explorer">
@@ -84,10 +159,10 @@ export default function KhuaApp() {
           {tabs.map((tab) => (
             <div
               key={tab.id}
-              className={`sidebar-item ${activeTab === tab.id ? 'active' : ''}`}
+              className={`sidebar-item ${activeTab === tab.id ? "active" : ""}`}
               onClick={() => {
-                setActiveTab(tab.id)
-                setSelectedFile(null)
+                setActiveTab(tab.id);
+                setSelectedFile(null);
               }}
             >
               <span className="sidebar-icon">
@@ -123,13 +198,13 @@ export default function KhuaApp() {
         {!selectedFile ? (
           <div className="file-grid">
             {projects[activeTab].map((file) => (
-              <div 
+              <div
                 key={file.id}
                 className="file-item"
                 onClick={() => setSelectedFile(file)}
               >
                 <div className="file-icon">
-                  {tabs.find(t => t.id === activeTab)?.icon || <FaFileAlt />}
+                  {tabs.find((t) => t.id === activeTab)?.icon || <FaFileAlt />}
                 </div>
                 <div className="file-name">{file.name}</div>
               </div>
@@ -138,7 +213,7 @@ export default function KhuaApp() {
         ) : (
           <div className="file-content">
             {renderContent()}
-            <button 
+            <button
               className="back-button"
               onClick={() => setSelectedFile(null)}
             >
@@ -148,5 +223,5 @@ export default function KhuaApp() {
         )}
       </div>
     </div>
-  )
+  );
 }
