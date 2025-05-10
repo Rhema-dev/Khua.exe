@@ -225,7 +225,7 @@ canvas {
   
 .dropdown-container {
   position: absolute;
-  bottom: 15px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
