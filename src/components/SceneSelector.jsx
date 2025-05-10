@@ -5,6 +5,9 @@ import { GalacticNebula } from './scenes/GalacticNebula'
 import { AuroraScene } from './scenes/AuroraScene'
 import { BMWInSpace } from './scenes/BMWInSpace'
 import { RobotInSpace } from './scenes/RobotInSpace'
+import LamboScene from './scenes/Lambo/LamboScene'
+import { Particles } from './scenes/Particles'
+import { Effects } from './scenes/Effects'
 import { OceanScene } from './scenes/OceanScene'
 import { FloatingIslandsScene } from './scenes/FloatingIslandsScene'
 import './ThreeScene.css'
@@ -17,7 +20,9 @@ export function SceneSelector() {
     galacticNebula: <GalacticNebula />,
     aurora: <AuroraScene />,
     bmwinspace: <BMWInSpace />,
-    robotinspace: <RobotInSpace />
+    robotinspace: <RobotInSpace />,
+    lambo: <LamboScene />,
+    particles: <Particles />,
     // ocean: <OceanScene />,
     // floatingIslands: <FloatingIslandsScene />
   }
@@ -25,8 +30,9 @@ export function SceneSelector() {
   return (
     <div className="scene-selector">
       <div className="canvas-container">
-        <Canvas camera={{ position: [0, 50, 100], fov: 60 }}>
+        <Canvas camera={{ position: [0, 50, 100], fov: 60 }} >
           {scenes[currentScene]}
+          <Effects className="effects" />
         </Canvas>
       </div>
 
@@ -41,6 +47,8 @@ export function SceneSelector() {
           <option value="aurora">Aurora Borealis</option>
           <option value="bmwinspace">BMW M4 G82</option>
           <option value="robotinspace">Robot</option>
+          <option value="lambo">Lamborghini park</option>
+          <option value="particles">Particles</option>
           {/* <option value="ocean">Ocean Waves</option> */}
           {/* <option value="floatingIslands">Floating Islands</option> */}
         </select>

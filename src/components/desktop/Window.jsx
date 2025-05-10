@@ -85,8 +85,8 @@ export default function Window({
       default={{
         x: 50,
         y: 50,
-        width: "90%",
-        height: "80%",
+        width: "95%",
+        height: "85%",
       }}
       minWidth={300}
       minHeight={200}

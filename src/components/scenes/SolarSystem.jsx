@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 import * as THREE from 'three'
+import { Effects } from './Effects'
 
 function AnimatedCamera() {
     const { camera } = useThree()
@@ -95,7 +96,7 @@ function Sun() {
     return (
       <mesh ref={ref}>
         <sphereGeometry args={[8, 64, 64]} />
-        <meshStandardMaterial emissive="#ffaa00" emissiveIntensity={1} color="#ffcc33" />
+        <meshStandardMaterial emissive="yellow" emissiveIntensity={1} color="#ffcc33" />
       </mesh>
     )
 }
@@ -131,8 +132,8 @@ export function SolarSystem() {
       <>
         <AnimatedCamera />
         <color attach="background" args={['black']} />
-        <Stars radius={10} depth={100} count={10000} factor={5} fade />
-        <pointLight position={[0, 0, 0]} intensity={10000} distance={100000000000000} />
+        <Stars radius={200} depth={100} count={10000} factor={5} fade />
+        <pointLight position={[0, 0, 0]} intensity={2000} distance={1000000000000000000} />
   
         <Sun />
   
@@ -146,7 +147,7 @@ export function SolarSystem() {
         <Planet name="Uranus" distance={104} size={3} color="#8ce3d9" speed={0.1} initialAngle={Math.random() * Math.PI * 2} />
         <Planet name="Neptune" distance={120} size={3} color="#3e6cf5" speed={0.08} initialAngle={Math.random() * Math.PI * 2} />
   
-        <Stars radius={3000} depth={60} count={10000} factor={7} fade />
+        {/* <Effects /> */}
         <OrbitControls />
       </>
     )
