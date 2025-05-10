@@ -7,8 +7,9 @@ function Model({ modelPath }) {
   const { scene } = useGLTF(modelPath);
 
   // Apply scale ONLY if the BMW model is selected
+  const isLambo = modelPath.includes("lambo");
   const isBMW = modelPath.includes("bmw_m4_g82");
-  const scale = isBMW ? [150, 150, 150] : [1, 1, 1];
+  const scale = isBMW ? [150, 150, 150]: isLambo ? [-40,-40, -40] : [1, 1, 1];
 
   return <primitive object={scene} scale={scale} />;
 }
@@ -27,6 +28,7 @@ export default function ModelViewer() {
         >
           <option value="/assets/models/robot/scene.gltf">Robot</option>
           <option value="/assets/models/bmw_m4_g82/scene.gltf">BMW M4 G82</option>
+          {/* <option value="/assets/models/lambo.glb">Lamborghini</option> */}
         </select>
 
         {/* 3D Canvas */}

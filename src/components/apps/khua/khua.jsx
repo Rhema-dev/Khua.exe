@@ -29,10 +29,10 @@ export default function KhuaApp() {
   const tabs = [
     { id: "web", label: "Web", icon: <FaGlobe /> },
     { id: "3d", label: "3D Art", icon: <FaImage /> },
-    { id: "motion", label: "Motion Graphics", icon: <FaVideo /> },
-    { id: "video", label: "Video Editing", icon: <FaVideo /> },
-    { id: "game", label: "Game Dev", icon: <FaGamepad /> },
-    { id: "sound", label: "Sound Design", icon: <FaMusic /> },
+    // { id: "motion", label: "Motion Graphics", icon: <FaVideo /> },
+    // { id: "video", label: "Video Editing", icon: <FaVideo /> },
+    // { id: "game", label: "Game Dev", icon: <FaGamepad /> },
+    // { id: "sound", label: "Sound Design", icon: <FaMusic /> },
   ];
 
   const projects = {

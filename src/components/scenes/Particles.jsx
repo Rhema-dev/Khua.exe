@@ -63,7 +63,7 @@ function Swarm({ count, dummy = new THREE.Object3D() }) {
   })
   return (
     <>
-      <pointLight ref={light} distance={4000} intensity={8000} color="red">
+      <pointLight ref={light} distance={4000} intensity={5000} color="red">
         <mesh scale={[3, 3, 3]}>
           <dodecahedronGeometry args={[4, 0]} />
         </mesh>
