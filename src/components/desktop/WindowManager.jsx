@@ -22,7 +22,7 @@ const EXTERNAL_APPS = {
     icon: '🧮'
   },
   code: {
-    url: "https://onecompiler.com/embed/",
+    url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
     icon: '👨‍💻'
   },
 };
