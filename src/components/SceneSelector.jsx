@@ -32,7 +32,7 @@ export function SceneSelector() {
   return (
     <div className="scene-selector">
       <div className="canvas-container">
-        <Canvas camera={{ position: [0, 50, 100], fov: 30 }} >
+        <Canvas camera={{ position: [0, 50, 100], fov: 50 }} >
           {scenes[currentScene]}
           <Effects className="effects"/>
         </Canvas>
