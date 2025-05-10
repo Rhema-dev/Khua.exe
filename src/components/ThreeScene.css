@@ -232,21 +232,38 @@ canvas {
 } */
 
 .scene-dropdown {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
-  backdrop-filter: blur(5px);
+  background: rgba(30, 30, 30, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   position: absolute;
-  bottom: 15px;
+  bottom: 16px;
+  left: 16px;
+  /* appearance: none; */
+  transition: all 0.3s ease;
+}
+
+.scene-dropdown:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(40, 40, 40, 0.7);
+}
+
+.scene-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
 .scene-dropdown option {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(20, 20, 20, 0.95);
+  color: white;
 }
+
 .performance-warning {
   position: fixed;
   top: 0;

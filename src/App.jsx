@@ -105,8 +105,16 @@ function App() {
                   <h2>Welcome to My Immersive Portfolio Experience</h2>
                   <p>
                     You're about to enter a 3D desktop environment with interactive elements.
-                    For the best experience, we recommend using a desktop computer with a dedicated graphics card.
+                    For best experience, use a desktop computer with a dedicated graphics card.
+                  <br /> <br /> <br /> Developed by Rhema Emmanuel-Great Oshiokhua 2025
                   </p>
+                  <p>
+                
+                <br />
+                - The effect bar at the top rght can be moved around for convinience <br />
+                - Wallpappers are 3D and interactive <br />
+                - They can be changed using the dropdown
+              </p>
                   <div className="welcome-progress">
                 <div className="progress-bar" style={{ width: '50%' }}></div>
               </div>
@@ -154,9 +162,9 @@ function App() {
               <div className="warning-icon">⚠️</div>
               <p>
                 For optimal performance, we recommend:<br />
-                - Disabling effects in settings if needed<br />
-                - Desktop with dedicated GPU<br />
-                - Latest Chrome/Firefox browser
+                - Uncheck enabled in the settings to disable effects<br />
+                - Use a Desktop/Laptop with dedicated GPU<br />
+                - Use Chrome/Firefox browser
               </p>
             </div>
           ) : (
