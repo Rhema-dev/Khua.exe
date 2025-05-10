@@ -12,31 +12,54 @@ function App() {
   const [windows, setWindows] = useState([]);
   const [showStartMenu, setShowStartMenu] = useState(false);
   const [shutdown, setShutdown] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [deviceInfo, setDeviceInfo] = useState(null);
+  const [currentWelcomePage, setCurrentWelcomePage] = useState(0);
+  
   const staticSoundRef = useRef(null);
 
-  // Initialize audio once
-  // useEffect(() => {
-  //   staticSoundRef.current = new Audio("/assets/sounds/static.mp3");
-  //   staticSoundRef.current.volume = 0.3;
-  //   staticSoundRef.current.loop = true; // Keep static playing continuously
+  useEffect(() => {
+    // Check device info when welcome message first shows
+    if (showWelcome) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const hasDedicatedGPU = checkForDedicatedGPU();
+      
+      setDeviceInfo({
+        isMobile,
+        hasDedicatedGPU,
+        userAgent: navigator.userAgent
+      });
+    }
+  }, [showWelcome]);
 
-  //   return () => {
-  //     if (staticSoundRef.current) {
-  //       staticSoundRef.current.pause();
-  //       staticSoundRef.current = null;
-  //     }
-  //   };
-  // }, []);
+  // Basic GPU detection (not 100% reliable but works in most cases)
+  const checkForDedicatedGPU = () => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) return false;
+      
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        return renderer.toLowerCase().indexOf('nvidia') !== -1 || 
+               renderer.toLowerCase().indexOf('amd') !== -1 ||
+               renderer.toLowerCase().indexOf('radeon') !== -1 ||
+               renderer.toLowerCase().indexOf('intel') !== -1;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  };
 
-  // Handle shutdown state changes
-  // useEffect(() => {
-  //   if (shutdown) {
-  //     staticSoundRef.current.play().catch(e => console.log("Audio play blocked:", e));
-  //   } else {
-  //     staticSoundRef.current.pause();
-  //     staticSoundRef.current.currentTime = 0; // Rewind for next time
-  //   }
-  // }, [shutdown]);
+  const handleWelcomeNext = () => {
+    if (currentWelcomePage < 1) {
+      setCurrentWelcomePage(currentWelcomePage + 1);
+    } else {
+      setShowWelcome(false);
+    }
+  };
 
   const openWindow = (content) => {
     const titles = {
@@ -74,6 +97,85 @@ function App() {
   return (
     <Router>
       <>
+        {showWelcome && (
+          <div className="welcome-overlay">
+            <div className="welcome-modal">
+              {currentWelcomePage === 0 ? (
+                <>
+                  <h2>Welcome to My Immersive Portfolio Experience</h2>
+                  <p>
+                    You're about to enter a 3D desktop environment with interactive elements.
+                    For the best experience, we recommend using a desktop computer with a dedicated graphics card.
+                  </p>
+                  <div className="welcome-progress">
+                <div className="progress-bar" style={{ width: '50%' }}></div>
+              </div>
+                  <button className="welcome-button" onClick={handleWelcomeNext}>
+            {currentWelcomePage === 0 ? 'Analyze System' : 'Begin Experience'}
+            <span className="button-arrow">→</span>
+          </button>
+                </>
+              ) : (
+          //       <>
+          //         <h2>System Check</h2>
+          //         <p>Detected Device: {deviceInfo?.isMobile ? "Mobile" : "Desktop"}</p>
+          //         <p>Graphics: {deviceInfo?.hasDedicatedGPU ? "Dedicated GPU detected" : "Integrated graphics"}</p>
+          //         {deviceInfo?.isMobile || !deviceInfo?.hasDedicatedGPU ? (
+          //           <p className="warning">
+          //             ⚠️ You may experience performance issues. Consider disabling effects in settings if available.
+          //           </p>
+          //         ) : (
+          //           <p>Your device should handle this experience well!</p>
+          //         )}
+          //         <button className="welcome-button" onClick={handleWelcomeNext}>
+          //   {currentWelcomePage === 0 ? 'Analyze System' : 'Begin Experience'}
+          //   <span className="button-arrow">→</span>
+          // </button>
+          //       </>
+          <>
+          <div className="device-stats">
+            <div className="stat-item">
+              <div className="stat-icon">📱</div>
+              <div className="stat-value">
+                {deviceInfo?.isMobile ? 'Mobile Device' : 'Desktop System'}
+              </div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-icon">🎮</div>
+              <div className="stat-value">
+                {deviceInfo?.hasDedicatedGPU ? 'GPU Detected' : 'Integrated Graphics'}
+                <div className={`stat-indicator ${deviceInfo?.hasDedicatedGPU ? 'success' : 'warning'}`}></div>
+              </div>
+            </div>
+          </div>
+
+          {deviceInfo?.isMobile || !deviceInfo?.hasDedicatedGPU ? (
+            <div className="performance-good">
+              <div className="warning-icon">⚠️</div>
+              <p>
+                For optimal performance, we recommend:<br />
+                - Disabling effects in settings if needed<br />
+                - Desktop with dedicated GPU<br />
+                - Latest Chrome/Firefox browser
+              </p>
+            </div>
+          ) : (
+            <div className="performance-good">
+              <div className="success-icon">✓</div>
+              <p>Your system meets recommended specifications!</p>
+            </div>
+            
+          )}
+          <button className="welcome-button" onClick={handleWelcomeNext}>
+             {currentWelcomePage === 0 ? 'Analyze System' : 'Begin Experience'}
+             <span className="button-arrow">→</span>
+           </button>
+        </>
+              )}
+            </div>
+          </div>
+        )}
+        
         <div onClick={() => setShowStartMenu(false)}>
           <ThreeScene />
           <Desktop openWindow={openWindow} />

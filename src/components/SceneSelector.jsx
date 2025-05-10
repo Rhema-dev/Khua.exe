@@ -13,16 +13,18 @@ import { FloatingIslandsScene } from './scenes/FloatingIslandsScene'
 import './ThreeScene.css'
 
 export function SceneSelector() {
-  const [currentScene, setCurrentScene] = useState('solarSystem')
+  const [currentScene, setCurrentScene] = useState('particles')
 
   const scenes = {
+    particles: <Particles />,
     solarSystem: <SolarSystem />,
     galacticNebula: <GalacticNebula />,
+    lambo: <LamboScene />,
     aurora: <AuroraScene />,
     bmwinspace: <BMWInSpace />,
     robotinspace: <RobotInSpace />,
-    lambo: <LamboScene />,
-    particles: <Particles />,
+    
+    
     // ocean: <OceanScene />,
     // floatingIslands: <FloatingIslandsScene />
   }
@@ -32,7 +34,7 @@ export function SceneSelector() {
       <div className="canvas-container">
         <Canvas camera={{ position: [0, 50, 100], fov: 60 }} >
           {scenes[currentScene]}
-          <Effects className="effects" />
+          <Effects className="effects"/>
         </Canvas>
       </div>
 
@@ -42,13 +44,15 @@ export function SceneSelector() {
           onChange={(e) => setCurrentScene(e.target.value)}
           className="scene-dropdown"
         >
+          <option value="particles">Particles</option>
           <option value="solarSystem">Solar System</option>
           <option value="galacticNebula">Galactic Nebula</option>
+           <option value="lambo">Lamborghini park</option>
           <option value="aurora">Aurora Borealis</option>
           <option value="bmwinspace">BMW M4 G82</option>
           <option value="robotinspace">Robot</option>
-          <option value="lambo">Lamborghini park</option>
-          <option value="particles">Particles</option>
+         
+          
           {/* <option value="ocean">Ocean Waves</option> */}
           {/* <option value="floatingIslands">Floating Islands</option> */}
         </select>

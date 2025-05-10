@@ -6,7 +6,7 @@ import { LUTCubeLoader } from 'postprocessing'
 export function Effects() {
   const texture = useLoader(LUTCubeLoader, '/F-6800-STD.cube')
   const { enabled, ...props } = useControls({
-    enabled: true,
+    enabled: false,
     temporalResolve: true,
     STRETCH_MISSED_RAYS: true,
     USE_MRT: true,
