@@ -4,7 +4,7 @@ import { FaGlobe, FaImage, FaTimes, FaSearch, FaPowerOff } from "react-icons/fa"
 import ModelViewer from "../3DViewer/3DViewer";
 import "./khua.css";
 
-export default function Khua({closeKhua}) {
+function Khua({closeKhua}) {
   const [activeRealm, setActiveRealm] = useState("quantum");
   const [selectedProjection, setSelectedProjection] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -284,3 +284,4 @@ export default function Khua({closeKhua}) {
     </div>
   );
 }
+export default Khua;
