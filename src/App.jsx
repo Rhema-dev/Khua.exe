@@ -6,7 +6,7 @@ import WindowManager from "./components/desktop/WindowManager";
 import ThreeScene from "./components/ThreeScene";
 import ShutdownScreen from "./components/apps/shutdown/shutdown";
 import StartMenu from "./components/desktop/StartMenu";
-import Khua from './components/apps/khua/Khua'
+import Khua from './components/apps/Khua/Khua'
 import "./App.css";
 
 function App() {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Window from './Window';
-import KhuaApp from "../apps/khua/khua";
+import KhuaApp from "../apps/Khua/Khua";
 import AboutApp from '../apps/about/About';
 import ContactApp from '../apps/contact/Contact';
 import PixelArtApp from '../apps/PixelArt/PixelArt';
