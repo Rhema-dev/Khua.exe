@@ -37,7 +37,7 @@ export default function LamboScene() {
         {/* Key */}
         <Lightformer form="ring" color="red" intensity={10} scale={2} position={[10, 5, 10]} onUpdate={(self) => self.lookAt(0, 0, 0)} />
       </Environment>
-      <Effects />
+      {/* <Effects /> */}
       <OrbitControls enablePan={false}  minPolarAngle={Math.PI / 2.2} maxPolarAngle={Math.PI / 2.2} />
     {/* </Canvas> */}</>
   )

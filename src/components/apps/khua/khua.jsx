@@ -1,227 +1,286 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import {
-  FaFolder,
-  FaFolderOpen,
-  FaImage,
-  FaVideo,
-  FaGamepad,
-  FaMusic,
-  FaFileAlt,
-  FaChevronLeft,
-  FaChevronRight,
-  FaSearch,
-  FaEllipsisH,
-  FaGlobe,
-} from "react-icons/fa";
-import ProjectsWeb from "./ProjectsWeb";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { FaGlobe, FaImage, FaTimes, FaSearch, FaPowerOff } from "react-icons/fa";
 import ModelViewer from "../3DViewer/3DViewer";
-import Projects3D from "./Projects3D";
-import ProjectsMotion from "./ProjectsMotion";
-import ProjectsVideo from "./ProjectsVideo";
-import ProjectsGame from "./ProjectsGame";
-import ProjectsSound from "./ProjectsSound";
 import "./khua.css";
 
-export default function KhuaApp() {
-  const [activeTab, setActiveTab] = useState("3d");
+export default function Khua({closeKhua}) {
+  const [activeRealm, setActiveRealm] = useState("quantum");
+  const [selectedProjection, setSelectedProjection] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [orbPositions, setOrbPositions] = useState([]);
 
-  const tabs = [
-    { id: "web", label: "Web", icon: <FaGlobe /> },
-    { id: "3d", label: "3D Art", icon: <FaImage /> },
-    // { id: "motion", label: "Motion Graphics", icon: <FaVideo /> },
-    // { id: "video", label: "Video Editing", icon: <FaVideo /> },
-    // { id: "game", label: "Game Dev", icon: <FaGamepad /> },
-    // { id: "sound", label: "Sound Design", icon: <FaMusic /> },
-  ];
+  // 5-second preloader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const projects = {
-    web: [
-      {
-        id: 1,
-        name: "PortfolioSite.react",
-        type: "web",
-        url: "https://khua-exe.pages.dev",
-      },
-      {
-        id: 2,
-        name: "Wiki.test",
-        type: "web",
-        url: "https://en.wikipedia.org/wiki/Main_Page",
-      },
-      {
-        id: 3,
-        name: "code.test",
-        type: "web",
-        url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
-      },
-    ],
-
-    "3d": [
-      { id: 1, name: "Open Model Viewer", type: "3d" },
-    ],
-    motion: [
-      { id: 1, name: "BrandIdent.aep", type: "motion" },
-      { id: 2, name: "Explainer.aep", type: "motion" },
-      { id: 3, name: "Titles.aep", type: "motion" },
-    ],
-    video: [
-      { id: 1, name: "ShortFilm.prproj", type: "video" },
-      { id: 2, name: "MusicVideo.prproj", type: "video" },
-      { id: 3, name: "Corporate.drp", type: "video" },
-    ],
-    game: [
-      {
-        id: 1,
-        name: "PortfolioSite.react",
-        type: "web",
-        url: "https://khua-exe.pages.dev",
-      },
-      {
-        id: 2,
-        name: "EcommerceApp.next",
-        type: "web",
-        url: "https://en.wikipedia.org/wiki/Main_Page",
-      },
-      {
-        id: 3,
-        name: "BlogPlatform.vue",
-        type: "web",
-        url: "https://codepen.io/team/codepen/embed/preview/PNaGbb",
-      },
-    ],
-    sound: [
-      { id: 1, name: "FilmScore.logicx", type: "sound" },
-      { id: 2, name: "GameSFX.fmod", type: "sound" },
-      { id: 3, name: "Album.als", type: "sound" },
-    ],
-  };
-
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const renderContent = () => {
-    if (selectedFile) {
-      switch (selectedFile.type) {
-        case "web":
-          return selectedFile.url ? (
-            <div className="iframe-wrapper">
-              <iframe
-                src={selectedFile.url}
-                title={selectedFile.name}
-                // frameBorder="0"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </div>
-          ) : (
-            <div className="empty-state">
-              No URL provided for this web project.
-            </div>
-          );
-
-        case "3d":
-          return <ModelViewer />;
-        case "motion":
-          return <ProjectsMotion />;
-        case "video":
-          return <ProjectsVideo />;
-        case "game":
-          return selectedFile.url ? (
-            <div className="iframe-wrapper">
-              <iframe
-                src={selectedFile.url}
-                title={selectedFile.name}
-                // frameBorder="0"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </div>
-          ) : (
-            <div className="empty-state">
-              No URL provided for this web project.
-            </div>
-          );
-        case "sound":
-          return <ProjectsSound />;
-        default:
-          return <div className="empty-state">Select a file to view</div>;
-      }
+  // Calculate random orb positions
+  useEffect(() => {
+    const positions = [];
+    for (let i = 0; i < 20; i++) {
+      positions.push({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 20 + 10,
+        opacity: Math.random() * 0.3 + 0.1,
+        delay: Math.random() * 5
+      });
     }
-    return <div className="empty-state">Select a file to view</div>;
+    setOrbPositions(positions);
+  }, []);
+
+  const realms = {
+    quantum: {
+      name: "WEB PROJECTS",
+      icon: <FaGlobe />,
+      color: "#00f7ff",
+      projects: [
+        {
+          id: 1,
+          name: "RHEMA NEXUS",
+          url: "https://rhemaa.vercel.app",
+          description: "Regular portfolio website"
+        },
+        {
+          id: 2,
+          name: "TUTORIAL SINGULARITY",
+          url: "https://tutorialheaven.pages.dev",
+          description: "A web app that streamlines learning process by providing users with a clear and detailed roadmap, tutorials, articles paid and free, tips and drawbacks for every step of the way to help users escape tutorial hell."
+        },
+        {
+          id: 3,
+          name: "FLUXRWARE NODE",
+          url: "https://fluxrware.com",
+          description: "Team agency landing page"
+        },
+        {
+          id: 4,
+          name: "RHEMBOW LABS",
+          url: "https://rhembowlabs.vercel.app",
+          description: "Creative agency landing page"
+        },
+      ]
+    },
+    neon: {
+      name: "3D PROJECTS",
+      icon: <FaImage />,
+      color: "#ff00f7",
+      projects: [
+        {
+          id: 1,
+          name: "QUANTUM VIEWER",
+          description: "3D reality manipulator"
+        }
+      ]
+    }
   };
+
+  const filteredProjects = realms[activeRealm].projects.filter(project =>
+    project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    project.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const renderProjection = () => {
+    if (!selectedProjection) return null;
+
+    return (
+      <motion.div 
+        className="holo-projection-main"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.button
+          className="close-projection"
+          onClick={() => setSelectedProjection(null)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaTimes /> CLOSE
+        </motion.button>
+
+        <div className="projection-content">
+          <div className="projection-header">
+            <h2>{selectedProjection.name}</h2>
+            <p>{selectedProjection.description}</p>
+          </div>
+
+          {selectedProjection.url ? (
+            <div className="quantum-iframe-container">
+              <iframe
+                src={selectedProjection.url}
+                title={selectedProjection.name}
+                className="quantum-iframe"
+              />
+              <div className="iframe-energy" style={{ background: `radial-gradient(circle, ${realms[activeRealm].color}33, transparent 70%)` }}></div>
+            </div>
+          ) : (
+            <ModelViewer />
+          )}
+        </div>
+      </motion.div>
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <div className="quantum-preloader">
+        <div className="preloader-content">
+          <div className="preloader-spinner" style={{ borderColor: realms[activeRealm].color }}></div>
+          <div className="preloader-text">INITIALIZING INTERFACE</div>
+          <div className="preloader-progress">
+            <motion.div 
+              className="progress-bar"
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1, ease: "linear" }}
+              style={{ backgroundColor: realms[activeRealm].color }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="file-explorer">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-section">
-          <div className="sidebar-title">Projects</div>
-          {tabs.map((tab) => (
-            <div
-              key={tab.id}
-              className={`sidebar-item ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => {
-                setActiveTab(tab.id);
-                setSelectedFile(null);
-              }}
-            >
-              <span className="sidebar-icon">
-                {activeTab === tab.id ? <FaFolderOpen /> : <FaFolder />}
-              </span>
-              {tab.label}
-            </div>
-          ))}
-        </div>
+    <div className="holo-universe">
+         <motion.button
+        className="close-khua-btn"
+        onClick={closeKhua}  // Use the passed closeKhua function
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <FaPowerOff /> EXIT KHUA
+      </motion.button>
+      {/* Background Orbs */}
+      <div className="quantum-orbs">
+        {orbPositions.map((orb, i) => (
+          <motion.div 
+            key={i}
+            className="quantum-orb"
+            style={{
+              left: `${orb.x}%`,
+              top: `${orb.y}%`,
+              width: `${orb.size}px`,
+              height: `${orb.size}px`,
+              opacity: orb.opacity,
+              background: `radial-gradient(circle, ${realms[activeRealm].color}${Math.floor(orb.opacity*100)}, transparent 70%)`
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: orb.opacity }}
+            transition={{ delay: orb.delay }}
+          />
+        ))}
       </div>
 
-      {/* Main Content */}
-      <div className="content-area">
-        {/* Toolbar */}
-        <div className="toolbar">
-          <button className="toolbar-button">
-            <FaChevronLeft size={12} />
-          </button>
-          <button className="toolbar-button">
-            <FaChevronRight size={12} />
-          </button>
-          <div style={{ flex: 1 }}></div>
-          <div className="search-box">
-            <FaSearch size={12} />
-            <input type="text" placeholder="Search projects..." />
-          </div>
-          <button className="toolbar-button">
-            <FaEllipsisH size={12} />
-          </button>
-        </div>
-
-        {/* File Grid or Content */}
-        {!selectedFile ? (
-          <div className="file-grid">
-            {projects[activeTab].map((file) => (
-              <div
-                key={file.id}
-                className="file-item"
-                onClick={() => setSelectedFile(file)}
-              >
-                <div className="file-icon">
-                  {tabs.find((t) => t.id === activeTab)?.icon || <FaFileAlt />}
-                </div>
-                <div className="file-name">{file.name}</div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="file-content">
-            {renderContent()}
-            <button
-              className="back-button"
-              onClick={() => setSelectedFile(null)}
+      {/* Main Interface */}
+      <div className="holo-core">
+        {/* Only show main UI when no projection is selected */}
+        {!selectedProjection && (
+          <>
+            {/* Realm Selector - Circular Menu */}
+            <motion.div 
+              className="realm-selector"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
             >
-              ← Back to files
-            </button>
-          </div>
+              {Object.entries(realms).map(([key, realm]) => (
+                <motion.button
+                  key={key}
+                  className={`realm-orb ${activeRealm === key ? 'active' : ''}`}
+                  onClick={() => setActiveRealm(key)}
+                  style={{ 
+                    color: realm.color,
+                    borderColor: realm.color,
+                    boxShadow: activeRealm === key ? `0 0 30px ${realm.color}` : 'none'
+                  }}
+                  whileHover={{ 
+                    scale: 1.1,
+                    boxShadow: `0 0 25px ${realm.color}`
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <div className="orb-icon">{realm.icon}</div>
+                  <div className="orb-label">{realm.name}</div>
+                </motion.button>
+              ))}
+            </motion.div>
+
+            {/* Quantum Search */}
+            <motion.div 
+              className="quantum-search"
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <FaSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder="ENGAGE QUANTUM SEARCH..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+              <div className="search-pulse" style={{ background: realms[activeRealm].color }} />
+            </motion.div>
+
+            {/* Projections Grid */}
+            <motion.div 
+              className="projection-grid"
+              layout
+            >
+              <AnimatePresence>
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    className="projection-card"
+                    onClick={() => setSelectedProjection(project)}
+                    layout
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                    whileHover={{ 
+                      y: -10,
+                      boxShadow: `0 10px 40px ${realms[activeRealm].color}66`
+                    }}
+                    style={{
+                      borderColor: realms[activeRealm].color,
+                      boxShadow: `0 0 20px ${realms[activeRealm].color}33`
+                    }}
+                  >
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                    <div 
+                      className="card-energy" 
+                      style={{ background: realms[activeRealm].color }}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          </>
         )}
+
+        {/* Projection View (full screen) */}
+        <AnimatePresence>
+          {selectedProjection && renderProjection()}
+        </AnimatePresence>
       </div>
+
+      {/* Interface Glow */}
+      <div 
+        className="universe-glow" 
+        style={{ background: `radial-gradient(circle at center, ${realms[activeRealm].color}15, transparent 70%)` }}
+      />
     </div>
   );
 }

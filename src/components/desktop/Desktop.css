@@ -124,3 +124,24 @@
     padding-bottom: 2rem; /* Extra space at bottom */
   }
 }
+
+
+/* Desktop.css */
+.khua-fullscreen-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000; /* Make sure it's above everything */
+  background: rgba(0, 0, 0, 0.9); /* Optional: dark background */
+}
+
+.desktop-icon.special-app .desktop-icon-emoji {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}

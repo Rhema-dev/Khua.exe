@@ -6,6 +6,7 @@ import WindowManager from "./components/desktop/WindowManager";
 import ThreeScene from "./components/ThreeScene";
 import ShutdownScreen from "./components/apps/shutdown/shutdown";
 import StartMenu from "./components/desktop/StartMenu";
+import Khua from "./components/apps/khua/Khua"
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(true);
   const [deviceInfo, setDeviceInfo] = useState(null);
   const [currentWelcomePage, setCurrentWelcomePage] = useState(0);
+  const [khuaOpen, setKhuaOpen] = useState(false);
   
   const staticSoundRef = useRef(null);
 
@@ -60,8 +62,18 @@ function App() {
       setShowWelcome(false);
     }
   };
+  const openKhua = () => {
+  setKhuaOpen(true);
+};
+const closeKhua = () => {
+  setKhuaOpen(false);
+};
 
   const openWindow = (content) => {
+    if (content === 'khua') {
+      setKhuaOpen(true);
+      return;
+    }
     const titles = {
       khua: "Khua.exe - Portfolio",
       about: "About Me.exe",
@@ -186,8 +198,13 @@ function App() {
         
         <div onClick={() => setShowStartMenu(false)}>
           <ThreeScene />
-          <Desktop openWindow={openWindow} />
+          <Desktop openWindow={openWindow} openKhua={openKhua} />
           <WindowManager windows={windows} setWindows={setWindows} />
+            {khuaOpen && (
+            <div className="khua-fullscreen-container">
+              <Khua closeKhua= {()=>{closeKhua()}} />
+            </div>
+          )}
         </div>
 
         <div className="taskbar-container">

@@ -19,6 +19,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
     {/* <Overlay /> */}
-    <Stats className='stats' />
+    {/* <Stats className='stats' /> */}
   </React.StrictMode>
 )

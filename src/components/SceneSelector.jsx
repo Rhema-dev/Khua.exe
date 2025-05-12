@@ -13,7 +13,7 @@ import { FloatingIslandsScene } from './scenes/FloatingIslandsScene'
 import './ThreeScene.css'
 
 export function SceneSelector() {
-  const [currentScene, setCurrentScene] = useState('particles')
+  const [currentScene, setCurrentScene] = useState('solarSystem')
 
   const scenes = {
     particles: <Particles />,
