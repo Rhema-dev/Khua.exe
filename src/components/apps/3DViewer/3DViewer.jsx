@@ -2,12 +2,8 @@ import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { 
-  FaTimes, 
-  FaArrowsAlt, 
-  FaPalette, 
-  FaLightbulb 
-} from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./3DViewer.css";
 
 function Model({ modelPath }) {
@@ -22,22 +18,15 @@ function Model({ modelPath }) {
 export default function ModelViewer({ onClose }) {
   const [model, setModel] = useState("/assets/models/robot/scene.gltf");
   const [activeTab, setActiveTab] = useState("models");
+  const navigate = useNavigate();
 
   return (
     <div className="holo-projection-main">
-      <motion.button
-        className="close-projection"
-        onClick={onClose}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <FaTimes /> CLOSE
-      </motion.button>
 
       <div className="projection-content">
         <div className="projection-header">
-          <h2>QUANTUM MODEL VIEWER</h2>
-          <p>Explore 3D assets in holographic space</p>
+          <h2>3D Model Viewer</h2>
+          <p>View and interact with 3D assets</p>
         </div>
 
         <div className="holo-model-selector">
@@ -46,14 +35,8 @@ export default function ModelViewer({ onClose }) {
               className={`holo-tab ${activeTab === "models" ? "active" : ""}`}
               onClick={() => setActiveTab("models")}
             >
-              MODELS
+              Models
             </button>
-            {/* <button
-              className={`holo-tab ${activeTab === "materials" ? "active" : ""}`}
-              onClick={() => setActiveTab("materials")}
-            >
-              MATERIALS
-            </button> */}
           </div>
 
           {activeTab === "models" && (
@@ -61,8 +44,8 @@ export default function ModelViewer({ onClose }) {
               onChange={(e) => setModel(e.target.value)}
               className="holo-select"
             >
-              <option value="/assets/models/robot/scene.gltf">ROBOT</option>
-              <option value="/assets/models/bmw_m4_g82/scene.gltf">BMW M4 G82</option>
+              <option value="/assets/models/robot/scene.gltf">Robot</option>
+              <option value="/assets/models/bmw_m4_g82/scene.gltf">BMW M4</option>
             </select>
           )}
         </div>
@@ -72,14 +55,28 @@ export default function ModelViewer({ onClose }) {
             camera={{ position: [5, 5, 5], fov: 75 }}
             gl={{ preserveDrawingBuffer: true }}
           >
-            <ambientLight intensity={5} color="white" />
+               
             <spotLight 
               position={[10, 10, 10]} 
               angle={0.15} 
-              penumbra={1} 
-              color="white"
-              intensity={2000}
+              penumbra={1}
+              intensity={2}
             />
+            {/* Improved Lighting Setup */}
+            <ambientLight intensity={2} color="#ffffff" />
+            <directionalLight
+              position={[10, 10, 5]}
+              intensity={1}
+              color="#ffffff"
+              castShadow
+            />
+            <directionalLight
+              position={[-10, -10, -5]}
+              intensity={0.5}
+              color="#ffffff"
+            />
+            <pointLight position={[0, 0, 5]} intensity={0.5} color="#ffffff" />
+            
             <Suspense fallback={null}>
               <Model modelPath={model} />
               <OrbitControls
@@ -89,20 +86,7 @@ export default function ModelViewer({ onClose }) {
               />
             </Suspense>
           </Canvas>
-          <div className="holo-canvas-glow"></div>
         </div>
-
-        {/* <div className="holo-control-panel">
-          <button className="holo-control-btn">
-            <FaArrowsAlt /> TRANSFORM
-          </button>
-          <button className="holo-control-btn">
-            <FaPalette /> MATERIALS
-          </button>
-          <button className="holo-control-btn">
-            <FaLightbulb /> LIGHTING
-          </button>
-        </div> */}
       </div>
     </div>
   );

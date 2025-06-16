@@ -5,49 +5,48 @@ import "./About.css";
 export default function About() {
   const skills = [
     "JavaScript (ES6+)",
+    "TypeScript",
     "React",
     "React Native",
+    "NextJS",
     "Node.js/Express",
+    "JWT",
     "MongoDB",
     "Three.js",
-    "Python",
-    "C++",
     "Blender3D",
+    "Davinci Resolve Studio",
     "After Effects",
-    "Unreal Engine 5",
-    "Premiere Pro",
     "FL Studio",
   ];
 
   const experiences = [
     {
-      role: "FrontEnd Web Developer",
+      role: "FrontEnd Web Developer (personal startup)",
       company: "Fluxrware Tech.",
-      period: "2024-Present",
+      period: "2024-2025",
+    },
+    {
+      role: "Data Miner",
+      company: "Naya Capital",
+      period: "2025",
     },
     {
       role: "FrontEnd Mobile Developer",
       company: "MaxiHealthCare",
       period: "2024-2025",
     },
-
     {
-      role: "3D Artist",
+      role: "Video editor",
       company: "Rhembow Labs",
-      period: "2024-Present",
-    },
-    {
-      role: "Motion Designer",
-      company: "Rhembow Labs",
-      period: "2024-Present",
+      period: "2024-2025",
     },
     {
       role: "Graphic Designer",
       company: "Rhembow Labs",
-      period: "2024-Present",
+      period: "2024-2025",
     },
     {
-      role: "Helpdesk Technician, Network Admin Intern",
+      role: "Network Admin Intern",
       company: "Nigerian gas marketing limited",
       period: "2023",
     },
@@ -55,8 +54,8 @@ export default function About() {
 
   const hobbies = [
     "Coding",
-    "Electronic Music Production",
-    "Editing montages",
+    "Digital Music Production",
+    "Video Editing",
     "Streaming",
     "Gaming",
     "3D Modeling",
@@ -75,8 +74,8 @@ export default function About() {
             <div className="profile-header">
               <div className="profile-avatar">R</div>
               <div className="profile-info">
-                <h2 className="profile-name">Rhema Emmanuel-Great Oshiokhua (Khua)</h2>
-                <p className="profile-title">Fullstack Creative Developer</p>
+                <h2 className="profile-name">Rhema Emmanuel-Great Oshiokhua</h2>
+                <p className="profile-title">Mobile Developer</p>
               </div>
             </div>
 
@@ -109,6 +108,17 @@ export default function About() {
                 </motion.span>
               ))}
             </div>
+            <br />
+            <motion.a
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href="/cv.pdf"
+            download
+            className="download-btn"
+          >
+            <FaFileDownload className="download-icon" />
+            Download Resume
+          </motion.a>
           </motion.div>
         </div>
 
@@ -117,8 +127,7 @@ export default function About() {
           <motion.div whileHover={{ scale: 1.01 }} className="about-card">
             <h2 className="about-title">About Me</h2>
             <p className="about-text">
-              Creative fullstack developer with expertise in 3D art, motion
-              graphics, and sound design. Passionate about building immersive
+              Creative Mobile developer with expertise in React Native. Passionate about building immersive
               digital experiences that combine technical excellence with
               artistic vision.
             </p>
@@ -165,16 +174,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href="/cv.pdf"
-            download
-            className="download-btn"
-          >
-            <FaFileDownload className="download-icon" />
-            Download Resume
-          </motion.a>
+          
         </div>
       </div>
     </motion.div>

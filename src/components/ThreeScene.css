@@ -396,3 +396,6 @@ canvas {
 .performance-warning button:hover {
   box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
 }
+.effects{
+  margin-top: 90%;
+}
